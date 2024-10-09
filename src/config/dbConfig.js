@@ -9,4 +9,4 @@ export default async function connectDB() {
         console.log("something went wrong")
         console.log(error)
     }
-}
+} 
