@@ -24,6 +24,9 @@ return res.json({message:'pong'});
 //     app.put('/hello',(req,res)=>{
 //         return res.json({message:'put:Hello world'})
 //         })
+
+
+
 app.listen(PORT,()=>{
     console.log(`server is running on port ${PORT}`);
     connectDB();

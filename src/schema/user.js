@@ -14,7 +14,7 @@ email:{
     minLength:5,
     validate:{
         validator:function (emailValue){
-            return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(emailValue)
+            return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(emailValue) // this line takes the email value and test i.e it follow this pattrn;
         },
         message:'Invalid email format'
     },
@@ -25,8 +25,8 @@ password:{
     required:true,
     minLength:5
 }
-},{timestamps:true});
+},{timestamps:true}); //timestamp-> it will add two extra properties ,createdAt and updatedAt.it will handled by mongoose.
 
-const user=mongoose.model("User",userSchema);  // user collection
+const user=mongoose.model("User",userSchema);  // user collection 
 
 export default user;
