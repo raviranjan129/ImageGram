@@ -1,13 +1,12 @@
 import dotenv from 'dotenv';
-import { CLOUDINARY_API_KEY } from './serverConfig';
+
 
 
 dotenv.config();
 
 export const DB_URL=process.env.DB_URL;
+console.log(DB_URL)
 
-export const CLOUDINARY_SECRET_KEY_ID=process.env.CLOUDINARY_SECRET_KEY_ID;
-
-export const CLOUDINARY_API_KEY=process.env.CLOUDINARY_API_KEY;
-
-export const CLOUDINARY_CLOUD_NAME=process.env.CLOUDINARY_CLOUD_NAME;
+export const AWS_ACCESS_KEY_ID=process.env.AWS_ACCESS_KEY_ID;
+export const AWS_SECRET_ACCESS_KEY=process.env.AWS_SECRET_ACCESS_KEY;
+export const AWS_REGION=process.env.AWS_REGION;
