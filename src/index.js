@@ -2,13 +2,13 @@ import express from "express";
 import connectDB from "./config/dbConfig.js";
 import { createPost } from "./controllers/postController.js";
 
-const PORT = 4000;
+const PORT = 6000;
 
 const app = express();  // create express app server instance;
 
-// app.use(express.json()); // middleware to parse json data; and app.use add middleware to every single request;
-// app.use(express.text()); //serlization and decerelization;
-// app.use(express.urlencoded());  //%25c etc; 
+app.use(express.json()); // middleware to parse json data; and app.use add middleware to every single request;
+app.use(express.text()); //serlization and decerelization;
+app.use(express.urlencoded());  //%25c etc; 
 
 
 // app.get('/',(req,res)=>{
@@ -16,7 +16,7 @@ const app = express();  // create express app server instance;
 // })
 
 app.get('/ping',(req,res)=>{
-    // const name=req.params.name;
+    // const name=req.params.name; //req.params->{name:'value'}
     console.log(req.query);
     console.log(req.body);
 return res.json({message:'pong' });
@@ -35,7 +35,7 @@ return res.json({message:'pong' });
 //         })
 
 
-// app.post ('/posts',createPost)   //routing layer;
+
 
 // function m1(req,res,next){  //middleware-> validation can be easily updated to the middleware;
 //     console.log('m1');
@@ -51,6 +51,8 @@ return res.json({message:'pong' });
 //     console.log('m3');
 //     next();
 // }
+
+app.post('/posts',createPost)   //routing layer;
 
 app.listen(PORT,()=>{
     console.log(`server is running on port ${PORT}`);
