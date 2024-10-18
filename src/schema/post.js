@@ -7,7 +7,7 @@ const postSchema= new mongoose.Schema({
         minLength:5
 
     },
-    imag:{
+    image:{
         type:String,
         required:true
     },
@@ -15,7 +15,7 @@ const postSchema= new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,     // which user post image;
         ref:"User"
     }
-})
+},{timestamps:true})
 
 const post =mongoose.model("Post",postSchema); // post collection
 
