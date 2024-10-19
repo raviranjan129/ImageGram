@@ -1,5 +1,6 @@
 import post from "../schema/post.js";
 
+
 export const createPost = async (caption, image, user) => {
   try {
     const newPost = await post.create({ caption, image, user });
@@ -22,7 +23,7 @@ export const findAllPost = async (offset,limit) => {
 
 export const countAllPosts=async()=>{
     try{
-        const count=await ost.countDocuments();
+        const count=await post.countDocuments();
         return count;
     }catch(error){
         console.log(error);
@@ -39,10 +40,20 @@ export const findPostById = async (id) => {
 };
 
 export const deletePostById = async (id) => {
-  try {
-    const post = await Post.findById(id);
-    return post;
-  } catch (error) {
-    console.log(error);
-  }
-};
+    try {
+        const Post = await post.findByIdAndDelete(id);
+        return Post;
+    } catch(error) {
+        console.log(error);
+    }
+}
+
+
+export const updatePostById = async (id,updateObject)=>{
+    try {
+      const Post= await post.findByIdAndUpdate(id,updateObject,{new:true});  
+      return Post;
+    } catch (error) {
+        console.log(error)
+    }
+}
