@@ -1,5 +1,6 @@
 import express from "express";
 import connectDB from "./config/dbConfig.js";
+import multer from 'multer';
 // import { createPost } from "./controllers/postController.js";
 // import { S3uploader } from "./config/multerConfig.js";
 // import postRouter from './routers/post.js';
@@ -11,9 +12,12 @@ const PORT = 6000;
 
 const app = express(); // create express app server instance;
 
+const upload= multer();
+
 app.use(express.json()); // middleware to parse json data; and app.use add middleware to every single request;
 app.use(express.text()); //serlization and decerelization;
 app.use(express.urlencoded()); //%25c etc;
+
 
 // app.get('/',(req,res)=>{
 // return res.send('Home');
