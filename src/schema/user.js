@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import bcrypt from 'bcrypt';
 
 const userSchema = new mongoose.Schema(
   {
@@ -30,6 +31,24 @@ const userSchema = new mongoose.Schema(
   },
   { timestamps: true }
 ); //timestamp-> it will add two extra properties ,createdAt and updatedAt.it will handled by mongoose.
+
+
+userSchema.pre('save',function modifyPassword(next){
+    //incoming user obj
+
+    const user = this; //object with plain password;
+
+const SALT = bcrypt.genSaltSync(9);
+
+//hash password
+const hashedPassword = bcrypt.hashSync(user.password,SALT);
+
+//replace plain password with hashed password
+
+user.password=hashedPassword;
+
+next();
+})
 
 const user = mongoose.model("User", userSchema); // user collection
 
