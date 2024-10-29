@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
 import bcrypt from 'bcrypt';
+import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
   {
@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
-      minLength: 5,
+      minLength: 6,
       validate: {
         validator: function (emailValue) {
           return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
