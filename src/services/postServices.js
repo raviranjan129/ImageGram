@@ -10,10 +10,10 @@ import { countAllPosts, createPost, deletePostById, findAllPost, updatePostById 
 
 const caption = createPostObject.caption?.trim();
 const image=createPostObject.image;
-// const user=createPostObject.user;
+const user=createPostObject.user;
 
 
-const post = await createPost(caption,image);
+const post = await createPost(caption,image,user);
 return post;
 }
 
