@@ -42,7 +42,7 @@ if(!isPasswordValid){
     }
 }
 
-const token = generateJwtToken({email:user.email,_id:user._id,username:user.username});
+const token = generateJwtToken({email:user.email,_id:user._id,username:user.username,role:user.role || "user"});
 return token;
 
     } catch (error) {

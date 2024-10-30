@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt';
+import bcrypt from "bcrypt";
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
@@ -23,6 +23,11 @@ const userSchema = new mongoose.Schema(
         message: "Invalid email format",
       },
     },
+    role: {
+      type: String,
+      default: "user",
+      enum: ["user", "admin"],
+    },
     password: {
       type: String,
       required: true,
@@ -32,23 +37,22 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 ); //timestamp-> it will add two extra properties ,createdAt and updatedAt.it will handled by mongoose.
 
+userSchema.pre("save", function modifyPassword(next) {
+  //incoming user obj
 
-userSchema.pre('save',function modifyPassword(next){
-    //incoming user obj
+  const user = this; //object with plain password;
 
-    const user = this; //object with plain password;
+  const SALT = bcrypt.genSaltSync(9);
 
-const SALT = bcrypt.genSaltSync(9);
+  //hash password
+  const hashedPassword = bcrypt.hashSync(user.password, SALT);
 
-//hash password
-const hashedPassword = bcrypt.hashSync(user.password,SALT);
+  //replace plain password with hashed password
 
-//replace plain password with hashed password
+  user.password = hashedPassword;
 
-user.password=hashedPassword;
-
-next();
-})
+  next();
+});
 
 const user = mongoose.model("User", userSchema); // user collection
 
