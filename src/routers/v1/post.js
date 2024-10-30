@@ -5,7 +5,7 @@ import { S3uploader } from '../../config/multerConfig.js';
 import { createPost, deletePost, getAllPosts,updatePost } from '../../controllers/postController.js';
 import { validate } from '../../validators/zodValidator.js';
 import { zodPostSchema } from '../../validators/zodPost.js';
-import { isAuthenticated } from '../../middleware/authMiddleware.js';
+import { isAdmin, isAuthenticated } from '../../middleware/authMiddleware.js';
 
 
 
@@ -17,6 +17,6 @@ router.get('/',getAllPosts);
 
 router.delete('/:id',isAuthenticated, deletePost);
 
-router.put('/:id',S3uploader.single('image'),updatePost)
+router.put('/:id',isAuthenticated,isAdmin,S3uploader.single('image'),updatePost)
 
 export default router;
