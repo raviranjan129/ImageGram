@@ -7,6 +7,7 @@ import multer from 'multer';
 // import userRouter from './routers/user.js'
 
 import apiRouter from './routers/apiRouter.js';
+import { isAuthenticated } from "./middleware/authMiddleware.js";
 
 const PORT = 6000;
 
@@ -29,10 +30,11 @@ app.use(express.urlencoded()); //%25c etc;
 
 app.use('/api',apiRouter);  // if the url starts with  /api then the request is  forwarded to the apiRouter;
 
-app.get("/ping", (req, res) => {
+app.get("/ping", isAuthenticated, (req, res) => {
   // const name=req.params.name; //req.params->{name:'value'}
   console.log(req.query);
   console.log(req.body);
+  console.log(req.user);
   return res.json({ message: "pong" });
 });
 
