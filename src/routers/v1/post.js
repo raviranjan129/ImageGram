@@ -15,7 +15,7 @@ router.post('/',isAuthenticated ,S3uploader.single('image'),validate(zodPostSche
 
 router.get('/',getAllPosts);
 
-router.delete('/:id', deletePost);
+router.delete('/:id',isAuthenticated, deletePost);
 
 router.put('/:id',S3uploader.single('image'),updatePost)
 

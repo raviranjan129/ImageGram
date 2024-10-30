@@ -14,7 +14,7 @@ export const createPost = async (caption, image, user) => {
 
 export const findAllPost = async (offset,limit) => {
   try {
-    const posts = await post.find().sort({createdAt:-1 }).skip(offset).limit(limit);
+    const posts = await post.find().sort({createdAt:-1 }).skip(offset).limit(limit).populate('user','username email _id');
     return posts;
   } catch (error) {
     console.log(error);
@@ -32,8 +32,8 @@ export const countAllPosts=async()=>{
 
 export const findPostById = async (id) => {
   try {
-    const post = await post.findById(id);
-    return post;
+    const Post = await post.findById(id);
+    return Post;
   } catch (error) {
     console.log(error);
   }
