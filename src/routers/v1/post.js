@@ -11,6 +11,17 @@ import { isAdmin, isAuthenticated } from '../../middleware/authMiddleware.js';
 
 const router = express.Router(); //Router object to modularize the routes;
 
+
+/**
+ * @swagger
+ * /posts:
+ *  post:
+ *      summary: Create a new post
+ *      description: Create a new post
+ * 
+ */
+
+
 router.post('/',isAuthenticated ,S3uploader.single('image'),validate(zodPostSchema),createPost); 
 
 router.get('/',getAllPosts);

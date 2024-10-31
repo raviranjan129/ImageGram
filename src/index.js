@@ -1,15 +1,21 @@
 import express from "express";
-import connectDB from "./config/dbConfig.js";
 import multer from 'multer';
+import connectDB from "./config/dbConfig.js";
 // import { createPost } from "./controllers/postController.js";
 // import { S3uploader } from "./config/multerConfig.js";
 // import postRouter from './routers/post.js';
 // import userRouter from './routers/user.js'
 
-import apiRouter from './routers/apiRouter.js';
 import { isAuthenticated } from "./middleware/authMiddleware.js";
+import apiRouter from './routers/apiRouter.js';
+import {options} from './utils/swaggerOptions.js'
+import swaggerJSDoc from "swagger-jsdoc";
+import swaggerUi from 'swagger-ui-express';
 
-const PORT = 6000;
+
+const PORT = 3000;
+
+
 
 const app = express(); // create express app server instance;
 
@@ -30,11 +36,14 @@ app.use(express.urlencoded()); //%25c etc;
 
 app.use('/api',apiRouter);  // if the url starts with  /api then the request is  forwarded to the apiRouter;
 
+const swaggerDocs=swaggerJSDoc(options);
+
+app.use('/api-docs',swaggerUi.serve,swaggerUi.setup(swaggerDocs))
 app.get("/ping", isAuthenticated, (req, res) => {
   // const name=req.params.name; //req.params->{name:'value'}
   console.log(req.query);
   console.log(req.body);
-  console.log(req.user);
+  console.log(req.user); 
   return res.json({ message: "pong" });
 });
 
