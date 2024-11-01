@@ -6,11 +6,11 @@ import connectDB from "./config/dbConfig.js";
 // import postRouter from './routers/post.js';
 // import userRouter from './routers/user.js'
 
-import { isAuthenticated } from "./middleware/authMiddleware.js";
-import apiRouter from './routers/apiRouter.js';
-import {options} from './utils/swaggerOptions.js'
+import ip from 'ip';
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from 'swagger-ui-express';
+import apiRouter from './routers/apiRouter.js';
+import { options } from './utils/swaggerOptions.js';
 
 
 const PORT = 3000;
@@ -44,7 +44,8 @@ app.get("/ping",  (req, res) => {
   console.log(req.query);
   console.log(req.body);
   console.log(req.user); 
-  return res.json({ message: "pong" });
+  const ipaddr=ip.address();
+  return res.json({ message: "pong" + ipaddr });
 });
 
 // app.get('/hello',(req,res)=>{
@@ -80,3 +81,6 @@ app.listen(PORT, () => {
   console.log(`server is running on port ${PORT}`);
   connectDB();
 });
+
+//client.->lb-> server1
+// ...............->server2
