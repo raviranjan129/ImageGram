@@ -1,10 +1,7 @@
 import express from "express";
 import multer from 'multer';
 import connectDB from "./config/dbConfig.js";
-// import { createPost } from "./controllers/postController.js";
-// import { S3uploader } from "./config/multerConfig.js";
-// import postRouter from './routers/post.js';
-// import userRouter from './routers/user.js'
+
 
 import ip from 'ip';
 import swaggerJSDoc from "swagger-jsdoc";
