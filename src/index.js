@@ -8,7 +8,7 @@ import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from 'swagger-ui-express';
 import apiRouter from './routers/apiRouter.js';
 import { options } from './utils/swaggerOptions.js';
-
+import {rateLimit} from "express-rate-limit";
 
 
 const PORT = 3000;
@@ -17,9 +17,12 @@ const PORT = 3000;
 
 const app = express(); // create express app server instance;
 
+const limiter = rateLimit({
+  windowMs:0.5 * 60 * 1000, //30 seconds
+  max:5 // limit each Ip to 5 req per windowMs
+});
 
-
-
+app.use(limiter);
 
 const upload= multer();
 
