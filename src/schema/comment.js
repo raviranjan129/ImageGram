@@ -39,3 +39,6 @@ const commentSchema = new mongoose.Schema({
 const Comment = mongoose.model("Comment",commentSchema);
 
 export default Comment;
+
+
+//write an API to create comments on a post or another comment

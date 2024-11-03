@@ -22,7 +22,7 @@ export const findAllPost = async (offset,limit) => {
 };
 
 export const countAllPosts=async()=>{
-    try{
+    try{ 
         const count=await post.countDocuments();
         return count;
     }catch(error){
